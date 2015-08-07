@@ -1,33 +1,38 @@
 import sys
-import csv
+import dbm.ndbm
 import os
+import dulwich
 
 HOME = os.path.expanduser("~")
+DIR = HOME + "/.config-manager"
 
 def main():
 	switch = {
 		'init': init,
+		'clone': clone,
 		'validate': validate
 	}
 	func = switch.get(sys.argv[1], lambda: printhelp)
 	return func()
 
 def init():
-	if os.path.exists( HOME + "/.config-manager/test"):
-		print 'Folder already exists, please validate it or check ~/.config-manager'
+	if os.path.exists( DIR ):
+		print('Folder already exists, please validate it or check ~/.config-manager')
 		return 1
 
-	os.makedirs(HOME + "/.config-manager")
+	os.makedirs( DIR )
 
-	#with open('config.csv')
+	return 0
+
+def clone():
 	return 0
 
 def validate():
-	print 'val-hit'
+	print('val-hit')
 	return 0
 
 def printhelp():
-	print 'Help here'
+	print('Help here')
 	return 1
 
 if __name__ == '__main__':
