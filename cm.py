@@ -28,7 +28,6 @@ def clone():
 	return 0
 
 def validate():
-	print('val-hit')
 	return 0
 
 def printhelp():
