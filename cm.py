@@ -1,10 +1,10 @@
 import sys
-import dbm.ndbm
+import shelve
 import os
 import dulwich
 
 HOME = os.path.expanduser("~")
-DIR = HOME + "/.config-manager"
+DIR = HOME + "/.cm/"
 
 def main():
 	switch = {
@@ -17,10 +17,18 @@ def main():
 
 def init():
 	if os.path.exists( DIR ):
-		print('Folder already exists, please validate it or check ~/.config-manager')
+		print('Folder already exists, please validate it or check ~/.cm')
 		return 1
 
 	os.makedirs( DIR )
+	db = shelve.open(DIR + "cnf.db",'n',0)
+	test = {}
+	test["rnd"] = ["!","@"]
+	test["rand"] = ["#","$"]
+	db["test"]=["testing","ttesting"]
+	db["bla"]=test
+	db.close()
+
 
 	return 0
 
